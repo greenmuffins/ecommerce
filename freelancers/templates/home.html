@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <style>
   IMG.displayed {
@@ -28,6 +27,7 @@
   </head>
   
   <body>
+  
     <div class="navbar-wrapper">
       <div class="container">
 
@@ -40,24 +40,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">3d Freelancers</a>
+              <a class="navbar-brand" href="#"><img style="max-width:100px; margin-top: -7px;"
+             src="http://i.imgur.com/ulUkCmz.jpg"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">3d Shops</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Postings <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                 <li><a href="#about">Loan out your printer</a></li>
+              
+                <li class="active"><a href="#">Home</a></li>              
+                  {% if user.is_authenticated %}
+		  <li><a href="{% url "posting-list" %}">View Posts</a></li>
+		  <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+                  <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
+                  {%else%}
+                 <li><a href="{% url "user_login" %}">Login</a></li>
+                 <li><a href="{% url "register" %}">Register</a></li>   
+                 {%endif%}
                 </li>
               </ul>
             </div>
@@ -66,7 +63,6 @@
 
       </div>
     </div>
-
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -140,5 +136,7 @@
         </div><!-- /.col-lg-4 -->
         
       </div><!-- /.row -->
-      
+
+		  <a style="float: right;" class="blog-nav-item inactive" href="{% url "user_logout" %}"> logout {{ user.username }}</a>
+
       

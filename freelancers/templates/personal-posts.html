@@ -1,0 +1,17 @@
+<h1>Postings</h1>
+Hey {{user.username}} here are your posts: 
+<table style="width:100%">
+  <tr>
+    <td>Title</td>
+    <td>Body</td> 
+  </tr>
+  {% for posting in posts %}
+  <tr>
+    <td><a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a></td>    
+    <td>{{ posting.body }}</td>
+  </tr>
+  {% empty %}
+    <li>No posts yet.</li>
+{% endfor %}
+</table>
+
