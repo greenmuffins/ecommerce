@@ -17,3 +17,14 @@ class Response(models.Model):
     theposting = models.ForeignKey(Posting, null=True, blank=True)
     body = models.CharField(max_length=1000, default = " ")
         
+class Upload(models.Model):
+    pic = models.ImageField("Image", upload_to="images/")    
+    upload_date=models.DateTimeField(auto_now_add =True)
+
+class Item(models.Model):
+    pic = models.ImageField("Image", upload_to="images/")    
+    upload_date=models.DateTimeField(auto_now_add =True)   
+    author = models.ForeignKey(User, null=True, blank=True)
+    name = models.CharField(max_length=250, default = " ")
+    description = models.CharField(max_length=1000, default = " ")
+    price = models.DecimalField(max_digits=6, decimal_places=2)

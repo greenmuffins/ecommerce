@@ -1,18 +1,6 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<style>
-  IMG.displayed {
-    background-color: black;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 75%;
-    width: 75%;}
-    
-   .row {
-    text-align: center;
-   }
-</style>
+  
   <head>
     <meta charset="utf-8">
     <title>
@@ -27,11 +15,17 @@
   </head>
   
   <body>
-  
-    <div class="navbar-wrapper">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    >
+    </script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
+    >
+    </script>
+
+   <div class="navbar-wrapper">
       <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -46,10 +40,13 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
               
-                <li><a href="#">Home</a></li>              
+                <li><a href="{% url "home" %}">Home</a></li>              
                   {% if user.is_authenticated %}
-		  <li class="active"><a href="{% url "posting-list" %}">View Posts</a></li>
-		  <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+      <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
+      <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
+      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+      <li class="active"><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
                  <li><a href="{% url "user_login" %}">Login</a></li>
@@ -63,30 +60,48 @@
 
       </div>
     </div>
-  <h1>
-{{ thePost.title }}</h1>
-    by: {{ thePost.author }}
-    <br>
-    {{ thePost.body }}
-<h1> Responses </h1>
-  {% if theResponses.all %}
 
-  {% for response in theResponses %}
-<h3>{{response.author}} </h3>
-<br>
-{{ response.body }}
-<br>
-{% endfor %}
-  {% else %}
-    <ts>No responses yet.</ts>  
 
-{% endif %}
-</table>
 
-<br>
-<h1>Make a response to this post</h1>
-<form action="{% url "create-response" %}" method="get"">
-    What do you want to say: <input type="text" name="the_text">
-    <input type="hidden" name="the_id" value={{thePostId}}>
-    <input type="submit" class="btn btn-primary" value="Enter">
-    </form>
+<div class="col-md-2">
+</div>
+<div class ="col-md-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{ thePost.title }}
+        </h3>
+      <span class="label label-info">By: {{ thePost.author }}</span>
+      </div>
+      <div class="panel-body">
+        {{ thePost.body }}
+      </div>
+    </div>
+    {% if theResponses.all %}
+    {% for response in theResponses %}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{response.author}}
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ response.body }}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+      <form action="{% url "create-response" %}" method="get">
+          <label>
+            Respond to this posting:
+          </label>
+          <input type="text" class="form-control" name="the_text">
+          <input type="hidden" name="the_id" value={{thePostId}}>
+          <button type="submit" class="btn pull-right btn-info">
+            Submit
+          </button>
+      </form>
+    </div>
+  </body>
+
+</html>

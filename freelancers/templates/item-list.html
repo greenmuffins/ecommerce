@@ -28,7 +28,7 @@
   
   <body>
   
-   <div class="navbar-wrapper">
+    <div class="navbar-wrapper">
       <div class="container">
 
         <nav class="navbar navbar-default navbar-static-top">
@@ -50,8 +50,8 @@
                   {% if user.is_authenticated %}
       <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
       <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
-      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
-      <li class="Active"><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li  class="active"><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+      <li><a href="{% url "posting-list" %}">View Posts</a></li>
       <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
@@ -68,20 +68,21 @@
     </div>
 
 
-    <div class="col-md-2">
+    <div class="col-md-5">
     </div>
-    <div class="col-md-8">
-<div class="page-header">
-      <h3>
-        Search results
-      </h3>
-    </div>
-      <ul class="list-group">
-{% for posting in Posts %}
-        <li class="list-group-item">
-          <span class="label label-info">By {{ posting.author }}: </span> 
-          <a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>
-        </li>
-{% endfor %}
-      </ul>
+    <div class="col-md-4">
+  {% for item in object_list %}
+  {% if item.author != user %}
+      <div class="panel pull-left panel-default">
+        <div class="panel-heading">
+             <img src="{{ item.pic.url }}" width="300" align="middle">
+        </div>
+        <div class="panel-body">
+        <span class="label label-info">$ {{item.price}}</span>
+          {{ item.name }}
+        </div>
+        </div>
+    {% endif %}
+{% endfor %}	
 </div>
+ 

@@ -28,10 +28,10 @@
   
   <body>
   
-    <div class="navbar-wrapper">
+   <div class="navbar-wrapper">
       <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -46,14 +46,17 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
               
-                <li class="active"><a href="#">Home</a></li>              
+                <li><a href="{% url "home" %}">Home</a></li>              
                   {% if user.is_authenticated %}
-		  <li><a href="{% url "posting-list" %}">View Posts</a></li>
-		  <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+      <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
+      <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
+      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+      <li><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
                  <li><a href="{% url "user_login" %}">Login</a></li>
-                 <li><a href="{% url "register" %}">Register</a></li>   
+                 <li class="Active"><a href="{% url "register" %}">Register</a></li>   
                  {%endif%}
                 </li>
               </ul>
@@ -63,6 +66,7 @@
 
       </div>
     </div>
+
 {% if form.errors %}
 <p>Username already taken.</p>
 {% endif %}

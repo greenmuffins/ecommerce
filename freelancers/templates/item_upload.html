@@ -48,10 +48,10 @@
               
                 <li><a href="{% url "home" %}">Home</a></li>              
                   {% if user.is_authenticated %}
-      <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
+      <li class="active"><a href="{% url "item_upload" %}">Sell a new item</a></li> 
       <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
       <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
-      <li class="Active"><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li><a href="{% url "posting-list" %}">View Posts</a></li>
       <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
@@ -73,15 +73,13 @@
     <div class="col-md-8">
 <div class="page-header">
       <h3>
-        Search results
+        Start selling a new item on your store!
       </h3>
     </div>
-      <ul class="list-group">
-{% for posting in Posts %}
-        <li class="list-group-item">
-          <span class="label label-info">By {{ posting.author }}: </span> 
-          <a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>
-        </li>
-{% endfor %}
+     <ul class="list-group">
+    <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.as_ul }} 
+        <input type="submit" value="Sell" />
+    </form>
       </ul>
 </div>

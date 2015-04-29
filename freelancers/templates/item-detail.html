@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  IMG.displayed {
-    background-color: black;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 75%;
-    width: 75%;}
-    
-   .row {
-    text-align: center;
-   }
-</style>
+  
   <head>
     <meta charset="utf-8">
     <title>
@@ -27,7 +15,13 @@
   </head>
   
   <body>
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    >
+    </script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
+    >
+    </script>
+
    <div class="navbar-wrapper">
       <div class="container">
 
@@ -50,9 +44,9 @@
                   {% if user.is_authenticated %}
       <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
       <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
-      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
-      <li class="Active"><a href="{% url "posting-list" %}">View Posts</a></li>
-      <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+      <li  class="active"><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+		  <li><a href="{% url "posting-list" %}">View Posts</a></li>
+		  <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
                  <li><a href="{% url "user_login" %}">Login</a></li>
@@ -68,20 +62,37 @@
     </div>
 
 
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
-<div class="page-header">
-      <h3>
-        Search results
-      </h3>
-    </div>
-      <ul class="list-group">
-{% for posting in Posts %}
-        <li class="list-group-item">
-          <span class="label label-info">By {{ posting.author }}: </span> 
-          <a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>
-        </li>
-{% endfor %}
-      </ul>
+<div class="col-md-2">
 </div>
+<div class ="col-md-8">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td class="col-md-3">
+            <img src="{{ item.pic.url }}" width="300" align="middle">
+          </td>
+          <td class="col-md-5">
+			    <ul class="list-group">
+			      <li class="list-group-item">
+			By: {{item.author}}
+			      </li>
+			      <li class="list-group-item">
+			        {{item.name}}
+			      </li>
+			      <li class="list-group-item">
+			        {{item.description}}
+			      </li>			      
+			      <li class="list-group-item">
+    <span class="label label-info">${{item.price}}</span>
+			      </li>
+			    </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+  </body>
+
+</html>

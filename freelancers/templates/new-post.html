@@ -28,10 +28,10 @@
   
   <body>
   
-    <div class="navbar-wrapper">
+   <div class="navbar-wrapper">
       <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -46,10 +46,13 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
               
-                <li><a href="#">Home</a></li>              
+                <li><a href="{% url "home" %}">Home</a></li>              
                   {% if user.is_authenticated %}
-		  <li><a href="{% url "posting-list" %}">View Posts</a></li>
-		  <li class="active"><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+      <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
+      <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
+      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+      <li><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li class="active"><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
                  <li><a href="{% url "user_login" %}">Login</a></li>
@@ -63,13 +66,24 @@
 
       </div>
     </div>
-{% block title %}Make a new Post{% endblock %}
 
-{% block content %}
-  <h1>Make a new Post</h1>
-
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
-{% endblock %}
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <form action="{% url "new-posting" %}" method="get">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="form-group">
+          <input type="text" class="form-control" name="the_title" placeholder="Title of posting">
+          </div>
+        </div>
+        <div class="panel-body">
+          <input type="text" class="form-control" name="the_body" placeholder="Body of posting">
+          <button type="submit" class="btn pull-right btn-info">
+            Submit request
+          </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>

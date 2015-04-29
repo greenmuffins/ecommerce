@@ -28,10 +28,10 @@
   
   <body>
   
-    <div class="navbar-wrapper">
+   <div class="navbar-wrapper">
       <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -46,10 +46,13 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
               
-                <li><a href="#">Home</a></li>              
+                <li><a href="{% url "home" %}">Home</a></li>              
                   {% if user.is_authenticated %}
-		  <li class="active"><a href="{% url "posting-list" %}">View Posts</a></li>
-		  <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
+      <li><a href="{% url "item_upload" %}">Sell a new item</a></li> 
+      <li><a href="{% url "your-item-list" %}">View your store</a></li>                  
+      <li><a href="{% url "item-list" %}">View items being sold</a></li>                                         
+      <li class="active"><a href="{% url "posting-list" %}">View Posts</a></li>
+      <li><a href="{% url "new-post" %}">Make a new Posting</a></li>                  
                   <li> <a href="{% url "user_logout" %}">Logout {{user}}</a></li>
                   {%else%}
                  <li><a href="{% url "user_login" %}">Login</a></li>
@@ -63,35 +66,52 @@
 
       </div>
     </div>
-<h1>Postings</h1>
-<h2>Your Posts</h2>
+
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+    <div class="page-header">
+      <h3>
+        Your postings:
+      </h3>
+    </div>
   {% for posting in object_list %}
   {% if posting.author == user %}
-    <b><a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>:</b>
-    <br>
-    {{ posting.body }}
-    <br>
-  {% endif %}
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>:
+          </h3>
+        </div>
+        <div class="panel-body">
+          {{ posting.body }}
+        </div>
+        </div>
+    {% endif %}
 {% endfor %}
-<br>
-<h2>Other users' Posts</h2>
-<table style="width:100%">
-  <tr>
-    <td>Title</td>
-    <td>Author</td> 
-  </tr>
+<div class="page-header">
+      <h3>
+        Other user posts:
+      </h3>
+    </div>
+      <ul class="list-group">
   {% for posting in object_list %}
-  {% if posting.author != user %}
-  <tr>
-    <td><a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a></td>    
-    <td>{{ posting.author }} {{request.user.username}}</td>
-  </tr>
-{% endif %}
+  {% if posting.author != user %}      
+        <li class="list-group-item">
+          <span class="label label-info">By {{ posting.author }}:</span>
+          <a href="{% url "post-detail" posting.id %}"> {{ posting.title }}</a>
+        </li>
+        {% endif %}
 {% endfor %}
-</table>
+      </ul>
 
-<h2>Search through post titles!</h2>
-<form action="{% url "search" %}" method="get"">
-<input type="text" name="q">
-<input type="submit" class="btn btn-primary" value="Enter">
+<div class="page-header">
+      <h3>
+        Search through other user posts.
+      </h3>
+    </div>
+<form action="{% url "search" %}" method="get">
+<input type="text" name="q" placeholder="search by title">
+<input type="submit" class="btn btn-primary" value="Search">
 </form>
+</div>
