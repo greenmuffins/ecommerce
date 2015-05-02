@@ -75,7 +75,8 @@
   {% if item.author != user %}
       <div class="panel pull-left panel-default">
         <div class="panel-heading">
-             <img src="{{ item.pic.url }}" width="300" align="middle">
+             <a href="{% url "item-detail" item.id %}">
+             <img src="{{ item.pic.url }}" width="300" align="middle"></a>
         </div>
         <div class="panel-body">
         <span class="label label-info">$ {{item.price}}</span>

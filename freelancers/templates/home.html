@@ -79,7 +79,7 @@
             <div class="carousel-caption">
               <h1>Print your ideas</h1>
               <p>If you have an idea you want to see 3d printer but lack the modeling knowledge, have someone else do it for you! Here at 3dfreelancers you can make a request that someone else can fulfill!</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Make a Request Today</a></p>
+              <p><a class="btn btn-lg btn-primary" href="{% url "new-post" %}" role="button">Make a Request Today</a></p>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
           <img class="img-circle" src="http://img.talkandroid.com/uploads/2014/06/help.jpg" style="width: 140px; height: 140px;">
           <h2>Make a posting!</h2>
           <p>If you find that there is something that you would like created and there is nothing on the 3d shop, make a request post on the website.</p>
-          <p><a class="btn btn-default" href="#" role="button">Make a post &raquo;</a></p>
+          <p><a class="btn btn-default" href="{% url "new-post" %}" role="button">Make a post &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" src="http://www.aquatic-experts.com/AQUATIC-EXPERTS%20IMAGES/GRAPHIC%20DESIGNS/arrow%20skinny%20black.png" style="width: 140px; height: 140px;">
@@ -135,11 +135,10 @@
           <img class="img-circle" src="http://i.ytimg.com/vi/FERNTAh5s0I/hqdefault.jpg" style="width: 140px; height: 140px;">
           <h2>Wait for a freelancer</h2>
           <p>After freelancers make bids on your posting, choose one and let them design for you! Once they are done you can print it on your own printer or one close by!</p>
-          <p><a class="btn btn-default" href="#" role="button">View nearby printers &raquo;</a></p>
+          <p></p>
         </div><!-- /.col-lg-4 -->
         
       </div><!-- /.row -->
 
-		  <a style="float: right;" class="blog-nav-item inactive" href="{% url "user_logout" %}"> logout {{ user.username }}</a>
 
       

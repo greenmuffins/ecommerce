@@ -82,27 +82,27 @@ def CreateResponse(request):
     return render(request, "post-detail.html", {
         'thePost': thePost,
         'theResponses': theResponses,
-        'thePostId': the_id,        
+        'thePostId': the_id,
     })    
   
 def PersonalPosts(request):
     thePosts = Response.objects.filter(theposting__author = request.user)
     return render(request, "personal-posts.html", {
         'thePosts': thePosts,
-    })   
+    })
   
 def search(request):
     if 'q' in request.GET:
         q = request.GET['q']
 	Posts = Posting.objects.filter( Q(title__icontains = q))
         return render(request, 'search-results.html',
-            {'Posts': Posts})  
+            {'Posts': Posts}) 
 
 def upload(request):
     if request.method=="POST":
-        img = UploadForm(request.POST, request.FILES)       
+        img = UploadForm(request.POST, request.FILES)
         if img.is_valid():
-            img.save()  
+            img.save() 
             return HttpResponseRedirect(reverse('upload'))
     else:
         img=UploadForm()
@@ -111,7 +111,7 @@ def upload(request):
 
 def item_upload(request):
     if request.method=="POST":
-        the_item = ItemForm(request.POST, request.FILES)       
+        the_item = ItemForm(request.POST, request.FILES)
         if the_item.is_valid():
             load_item = the_item.save(commit=False)
             load_item.author = request.user
@@ -124,14 +124,14 @@ def item_upload(request):
 
 def item_upload2(request):
     if request.method=="POST":
-        the_item = ItemForm(request.POST, request.FILES)       
+        the_item = ItemForm(request.POST, request.FILES)
         if the_item.is_valid():
             load_item = the_item
             load_item.author = request.user
             the_item.name = request.user.username
-            the_item.save()            
+            the_item.save()
             return HttpResponseRedirect(reverse('item_upload'))
     else:
         the_item=ItemForm()
     Items=Item.objects.all()
-    return render(request,'item_upload.html',{'form':the_item,'items':Items})    
+    return render(request,'item_upload.html',{'form':the_item,'items':Items})
