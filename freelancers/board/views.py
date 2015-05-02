@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from forms import PostingForm, UploadForm, ItemForm
+from board.forms import PostingForm, UploadForm, ItemForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from models import Posting, Response, Upload, Item
+from board.models import Posting, Response, Upload, Item
 from django.utils import timezone
 from django.db.models import Sum, Q
 from django.template import RequestContext
@@ -94,7 +94,7 @@ def PersonalPosts(request):
 def search(request):
     if 'q' in request.GET:
         q = request.GET['q']
-	Posts = Posting.objects.filter( Q(title__icontains = q))
+        Posts = Posting.objects.filter( Q(title__icontains = q))
         return render(request, 'search-results.html',
             {'Posts': Posts}) 
 
