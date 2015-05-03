@@ -1,0 +1,40 @@
+home
+	displays the home page
+	describes the website
+	links to making a posting
+
+register
+	requires username/password
+	standard
+
+login
+	standard login features
+	redirects to homepage
+
+sell-item
+	allows users to make a post about a 3d printed design they are selling
+	can upload an image, make a description, and set a price
+
+your store
+	shows all the items you are selling and links to their detail page
+
+items sold by others
+	shows all the items being sold by other people with links
+
+item details
+	the creator
+	an image
+	description
+	price
+	buying is not implemented because it is a mock up
+
+post request
+	post a title and details about something you need to be 3d printed
+
+see your posts and others
+	shows all the posting requests that are available with yours at the top
+	allows you to click on themt o see if there are any responses
+
+respond to a posting
+	can comment on someones posting to perhaps say you can help them out
+
